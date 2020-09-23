@@ -1,0 +1,10 @@
+{
+  "domain": "RENAME_ME",
+  "sslCertificateARN": "RENAME_ME",
+  "EC2InstanceAddress": "RENAME_ME",
+  "aws": {
+    "serviceId": "RENAME_ME",
+    "region": "eu-central-1",
+    "stage": "prod"
+  }
+}

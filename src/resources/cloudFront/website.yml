@@ -1,0 +1,49 @@
+Resources:
+  CloudFrontWebsite:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases:
+          - !Join
+            - '.'
+            - - 'www'
+              - ${ self:provider.parameters.domain }
+        Origins:
+          - Id: EC2
+            DomainName: ec2-18-158-191-65.eu-central-1.compute.amazonaws.com
+            CustomOriginConfig:
+              HTTPPort: 80
+              HTTPSPort: 443
+              OriginProtocolPolicy: http-only
+              OriginReadTimeout: 30
+              OriginKeepaliveTimeout: 5
+        DefaultCacheBehavior:
+          TargetOriginId: EC2
+          ForwardedValues:
+            QueryString: true
+            Cookies:
+              Forward: all
+          ViewerProtocolPolicy: redirect-to-https
+          MinTTL: 0
+          AllowedMethods:
+            - HEAD
+            - DELETE
+            - POST
+            - GET
+            - OPTIONS
+            - PUT
+            - PATCH
+          CachedMethods:
+            - HEAD
+            - GET
+          SmoothStreaming: false
+          DefaultTTL: 0
+          MaxTTL: 0
+          Compress: true
+        Comment: ''
+        PriceClass: PriceClass_All
+        Enabled: true
+        ViewerCertificate:
+          AcmCertificateArn: ${ self:provider.parameters.sslCertificateARN }
+          SslSupportMethod: sni-only
+          MinimumProtocolVersion: TLSv1.1_2016

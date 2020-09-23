@@ -1,0 +1,18 @@
+Resources:
+  S3BucketRedirectToWWW:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName:
+        !Join
+        - '-'
+        - - !Ref AWS::AccountId
+          - ${ self:provider.parameters.domain }
+          - redirect-to-www
+      WebsiteConfiguration:
+        RedirectAllRequestsTo:
+          HostName:
+            !Join
+            - '.'
+            - - 'www'
+              - ${ self:provider.parameters.domain }
+          Protocol: https
