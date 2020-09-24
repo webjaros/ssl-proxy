@@ -7,11 +7,6 @@ provider:
   region: ${ opt:region, self:provider.parameters.aws.region }
   stage: ${ opt:stage, self:provider.parameters.aws.stage }
 
-plugins:
-  - serverless-offline
-  - serverless-plugin-warmup
-  - serverless-sequelize-migrations
-
 resources:
   - ${ file(src/resources/s3/RedirectToWWW.yml) }
   - ${ file(src/resources/cloudFront/RedirectToWWW.yml) }
