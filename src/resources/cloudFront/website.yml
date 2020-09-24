@@ -10,7 +10,7 @@ Resources:
               - ${ self:provider.parameters.domain }
         Origins:
           - Id: EC2
-            DomainName: ec2-18-158-191-65.eu-central-1.compute.amazonaws.com
+            DomainName: ${ self:provider.parameters.domain }
             CustomOriginConfig:
               HTTPPort: 80
               HTTPSPort: 443
