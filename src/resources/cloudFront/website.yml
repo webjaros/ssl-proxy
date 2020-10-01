@@ -10,7 +10,7 @@ Resources:
               - ${ self:provider.parameters.domain }
         Origins:
           - Id: EC2
-            DomainName: ${ self:provider.parameters.domain }
+            DomainName: ${ self:provider.parameters.EC2InstanceAddress }
             CustomOriginConfig:
               HTTPPort: 80
               HTTPSPort: 443
@@ -18,13 +18,6 @@ Resources:
               OriginReadTimeout: 30
               OriginKeepaliveTimeout: 5
         DefaultCacheBehavior:
-          TargetOriginId: EC2
-          ForwardedValues:
-            QueryString: true
-            Cookies:
-              Forward: all
-          ViewerProtocolPolicy: redirect-to-https
-          MinTTL: 0
           AllowedMethods:
             - HEAD
             - DELETE
@@ -36,11 +29,17 @@ Resources:
           CachedMethods:
             - HEAD
             - GET
-          SmoothStreaming: false
-          DefaultTTL: 0
-          MaxTTL: 0
+          CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad #Managed-CachingDisabled
           Compress: true
-        Comment: ''
+          OriginRequestPolicyId: 216adef6-5c7f-47e4-b989-5492eafa07d3 #Managed-AllViewer
+          SmoothStreaming: false
+          TargetOriginId: EC2
+          ViewerProtocolPolicy: redirect-to-https
+        Comment:
+          !Join
+          - ' '
+          - - 'Points EC2 of'
+            - ${ self:provider.parameters.domain }
         PriceClass: PriceClass_All
         Enabled: true
         ViewerCertificate:
