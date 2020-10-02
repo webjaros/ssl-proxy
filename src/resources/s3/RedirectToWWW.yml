@@ -1,6 +1,7 @@
 Resources:
   S3BucketRedirectToWWW:
     Type: AWS::S3::Bucket
+    Condition: DomainIsWWW
     Properties:
       BucketName:
         !Join

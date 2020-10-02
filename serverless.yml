@@ -8,6 +8,7 @@ provider:
   stage: ${ opt:stage, self:provider.parameters.aws.stage }
 
 resources:
+  - ${ file(src/resources/conditions.yml) }
+  - ${ file(src/resources/cloudFront/website.yml) }
   - ${ file(src/resources/s3/RedirectToWWW.yml) }
   - ${ file(src/resources/cloudFront/RedirectToWWW.yml) }
-  - ${ file(src/resources/cloudFront/website.yml) }

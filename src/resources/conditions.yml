@@ -1,0 +1,2 @@
+Conditions:
+  DomainIsWWW: !Equals [ "${ self:provider.parameters.domainType }", "www" ]

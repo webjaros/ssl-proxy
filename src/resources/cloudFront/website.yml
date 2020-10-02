@@ -4,10 +4,13 @@ Resources:
     Properties:
       DistributionConfig:
         Aliases:
-          - !Join
-            - '.'
-            - - 'www'
-              - ${ self:provider.parameters.domain }
+          - !If
+            - DomainIsWWW
+            - !Join
+              - '.'
+              - - 'www'
+                - ${ self:provider.parameters.domain }
+            - ${ self:provider.parameters.domain }
         Origins:
           - Id: EC2
             DomainName: ${ self:provider.parameters.EC2InstanceAddress }

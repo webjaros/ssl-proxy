@@ -1,6 +1,7 @@
 Resources:
   CloudFrontRedirectToWWW:
     Type: AWS::CloudFront::Distribution
+    Condition: DomainIsWWW
     Properties:
       DistributionConfig:
         Aliases:
