@@ -15,7 +15,7 @@ Resources:
           - Id: EC2
             DomainName: ${ self:provider.parameters.EC2InstanceAddress }
             CustomOriginConfig:
-              HTTPPort: 80
+              HTTPPort: ${ self:provider.parameters.originPort }
               HTTPSPort: 443
               OriginProtocolPolicy: http-only
               OriginReadTimeout: 30

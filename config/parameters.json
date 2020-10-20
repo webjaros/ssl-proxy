@@ -7,5 +7,6 @@
   "domain": "RENAME_ME",
   "domainType": "subdomain",
   "EC2InstanceAddress": "RENAME_ME",
+  "originPort": 80,
   "sslCertificateARN": "RENAME_ME"
 }
