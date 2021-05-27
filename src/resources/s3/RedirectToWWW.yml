@@ -7,7 +7,7 @@ Resources:
         !Join
         - '-'
         - - !Ref AWS::AccountId
-          - ${ self:provider.parameters.domain }
+          - ${env:DOMAIN}
           - redirect-to-www
       WebsiteConfiguration:
         RedirectAllRequestsTo:
@@ -15,5 +15,5 @@ Resources:
             !Join
             - '.'
             - - 'www'
-              - ${ self:provider.parameters.domain }
+              - ${env:DOMAIN}
           Protocol: https

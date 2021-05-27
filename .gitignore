@@ -7,7 +7,7 @@ jspm_packages
 
 # Development
 .idea
-.apprc
+.env
 .vscode
 
 tempCodeRunnerFile.js

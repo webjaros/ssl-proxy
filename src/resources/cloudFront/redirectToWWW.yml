@@ -5,7 +5,7 @@ Resources:
     Properties:
       DistributionConfig:
         Aliases:
-          - ${ self:provider.parameters.domain }
+          - ${env:DOMAIN}
         Origins:
           - Id: S3Origin
             DomainName: !Select [ 2, !Split [ "/", !GetAtt S3BucketRedirectToWWW.WebsiteURL ] ]
@@ -42,6 +42,6 @@ Resources:
         PriceClass: PriceClass_All
         Enabled: true
         ViewerCertificate:
-          AcmCertificateArn: ${ self:provider.parameters.sslCertificateARN }
+          AcmCertificateArn: ${env:SSL_ARN}
           SslSupportMethod: sni-only
           MinimumProtocolVersion: TLSv1.1_2016

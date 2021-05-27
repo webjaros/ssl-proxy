@@ -9,13 +9,13 @@ Resources:
             - !Join
               - '.'
               - - 'www'
-                - ${ self:provider.parameters.domain }
-            - ${ self:provider.parameters.domain }
+                - ${env:DOMAIN}
+            - ${env:DOMAIN}
         Origins:
           - Id: EC2
-            DomainName: ${ self:provider.parameters.EC2InstanceAddress }
+            DomainName: ${env:EC2IP}
             CustomOriginConfig:
-              HTTPPort: ${ self:provider.parameters.originPort }
+              HTTPPort: ${env:ORIGIN_PORT}
               HTTPSPort: 443
               OriginProtocolPolicy: http-only
               OriginReadTimeout: 30
@@ -42,10 +42,10 @@ Resources:
           !Join
           - ' '
           - - 'Points EC2 of'
-            - ${ self:provider.parameters.domain }
+            - ${env:DOMAIN}
         PriceClass: PriceClass_All
         Enabled: true
         ViewerCertificate:
-          AcmCertificateArn: ${ self:provider.parameters.sslCertificateARN }
+          AcmCertificateArn: ${env:SSL_ARN}
           SslSupportMethod: sni-only
           MinimumProtocolVersion: TLSv1.1_2016

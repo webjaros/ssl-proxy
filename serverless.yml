@@ -1,14 +1,17 @@
-service: ${ self:provider.parameters.aws.serviceId }
+service: ${env:SERVICE_ID}
+
+useDotenv: true
+configValidationMode: error
 
 provider:
   name: aws
-  runtime: nodejs12.x
-  parameters: ${ file(config/index.js) }
-  region: ${ opt:region, self:provider.parameters.aws.region }
-  stage: ${ opt:stage, self:provider.parameters.aws.stage }
+  runtime: nodejs14.x
+  region: ${env:AWS_REGION}
+  stage: prod
 
 resources:
-  - ${ file(src/resources/conditions.yml) }
-  - ${ file(src/resources/cloudFront/website.yml) }
-  - ${ file(src/resources/s3/RedirectToWWW.yml) }
-  - ${ file(src/resources/cloudFront/RedirectToWWW.yml) }
+  - ${file(src/resources/cloudFront/website.yml)}
+  - ${file(src/resources/cloudFront/redirectToWWW.yml)}
+  - ${file(src/resources/s3/RedirectToWWW.yml)}
+  - Conditions:
+      DomainIsWWW: !Equals [ "${env:DOMAIN_TYPE}", "www" ]
